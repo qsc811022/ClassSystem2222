@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>測試認證功能</title>
+</head>
+<body>
+    <h1>🔧 認證功能測試</h1>
+    
+    <div id="auth-status">
+        <p>檢查中...</p>
+    </div>
+    
+    <button onclick="testLogin()">測試登入</button>
+    <button onclick="testLogout()">測試登出</button>
+    <button onclick="checkAuth()">檢查認證狀態</button>
+    
+    <script>
+        function checkAuth() {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            
+            document.getElementById('auth-status').innerHTML = `
+                <h3>認證狀態:</h3>
+                <p>Token: ${token ? '✅ 存在' : '❌ 不存在'}</p>
+                <p>User: ${user ? '✅ 存在' : '❌ 不存在'}</p>
+                <pre>${user || '無用戶資料'}</pre>
+            `;
+        }
+        
+        function testLogin() {
+            // 模擬登入成功
+            const mockToken = 'test-token-123';
+            const mockUser = { name: '測試用戶', email: 'test@example.com', role: 'student' };
+            
+            localStorage.setItem('token', mockToken);
+            localStorage.setItem('user', JSON.stringify(mockUser));
+            
+            alert('✅ 模擬登入成功');
+            checkAuth();
+        }
+        
+        function testLogout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            
+            alert('✅ 登出成功');
+            checkAuth();
+        }
+        
+        // 頁面載入時檢查狀態
+        checkAuth();
+    </script>
+</body>
+</html>

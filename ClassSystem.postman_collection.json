@@ -1,0 +1,114 @@
+{
+  "info": {
+    "name": "ClassSystem API",
+    "_postman_id": "12345678-abcd-efgh-ijkl-987654321000",
+    "description": "API 測試：Google Login, JWT, Courses CRUD",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Google Login (redirect)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/auth/google",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["auth", "google"]
+        }
+      }
+    },
+    {
+      "name": "Get All Courses",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/courses",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "courses"]
+        }
+      }
+    },
+    {
+      "name": "Get Today's Courses",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/courses/today",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "courses", "today"]
+        }
+      }
+    },
+    {
+      "name": "Create Course (Admin Only)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" },
+          { "key": "Content-Type", "value": "application/json", "type": "text" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Math Basics\",\n  \"start_time\": \"2025-09-01T09:00:00Z\",\n  \"end_time\": \"2025-09-01T12:00:00Z\",\n  \"classroom_id\": 1,\n  \"instructor_id\": 1\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/courses",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "courses"]
+        }
+      }
+    },
+    {
+      "name": "Update Course (Admin Only)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" },
+          { "key": "Content-Type", "value": "application/json", "type": "text" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Math Basics - Updated\",\n  \"start_time\": \"2025-09-01T09:00:00Z\",\n  \"end_time\": \"2025-09-01T11:00:00Z\",\n  \"classroom_id\": 1,\n  \"instructor_id\": 1\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/courses/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "courses", "1"]
+        }
+      }
+    },
+    {
+      "name": "Delete Course (Admin Only)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/courses/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "courses", "1"]
+        }
+      }
+    }
+  ]
+}
